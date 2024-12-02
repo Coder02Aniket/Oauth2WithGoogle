@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background: #f0f2f5;">
+
+<!-- Fullscreen Section -->
+<div style="display: flex; align-items: center; justify-content: center; height: 100vh; background: linear-gradient(135deg, #4A90E2, #7B4397); color: #fff;">
+
+    <!-- Welcome Card -->
+    <div style="background: rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 15px; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); max-width: 500px;">
+        <h1 style="font-size: 2.5em; margin-bottom: 10px;">Welcome to Our Website!</h1>
+        <p style="font-size: 1.2em; line-height: 1.5em; color: #f0f0f0;">
+            Thank you for visiting. We are glad to have you here. Explore and enjoy our content!
+        </p>
+
+        <!-- Login Button -->
+        <a th:href="@{/api/login}" style="display: inline-block; padding: 10px 20px; margin-top: 20px; color: #4A90E2; background: #fff; border-radius: 25px; text-decoration: none; font-weight: bold; transition: all 0.3s ease;">
+            Get Started
+        </a>
+    </div>
+</div>
+</body>
+</html>

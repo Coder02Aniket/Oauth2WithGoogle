@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #1a73e8;
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            padding: 0.5rem 0;
+            min-width: 200px;
+            display: none;
+        }
+
+        .user-menu:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #555;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f8f9fa;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+        }
+
+        .profile-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-email {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a73e8;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .content-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f2f5;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-title {
+            font-weight: bold;
+        }
+
+        .activity-date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .activity-content {
+            color: #555;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="navbar-content">
+        <a href="#" class="logo">Dashboard</a>
+        <div class="nav-links">
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+            <a href="#"><i class="fas fa-bell"></i> Notifications</a>
+            <a href="#"><i class="fas fa-envelope"></i> Messages</a>
+            <div class="user-menu">
+                <img src="/static/passportsizeProfile.png"
+                     alt="User Avatar"
+                     class="user-avatar">
+                <div class="dropdown-menu">
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                    <a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+ Main Content
+<main class="main-content">
+     Profile Section
+    <aside class="profile-card">
+        <div class="profile-header">
+            <img src="/static/passportsizeProfile.png"
+                 alt="Profile Picture"
+                 class="profile-avatar">
+            <h2 class="profile-name" th:text="${#authentication.principal.name}">John Doe</h2>
+            <p class="profile-email" th:text="${#authentication.principal.email}">john.doe@example.com</p>
+        </div>
+<!--        <div class="profile-stats">-->
+<!--            <div class="stat-item">-->
+<!--                <div class="stat-value" th:text="${userStats.posts}">42</div>-->
+<!--                <div class="stat-label">Posts</div>-->
+<!--            </div>-->
+<!--            <div class="stat-item">-->
+<!--                <div class="stat-value" th:text="${userStats.connections}">128</div>-->
+<!--                <div class="stat-label">Connections</div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </aside>
+
+    <!-- Activity Feed Section -->
+<!--    <section class="content-section">-->
+<!--        <h2 class="section-title">Recent Activity</h2>-->
+<!--        <ul class="activity-list">-->
+<!--            <li th:each="activity : ${activities}" class="activity-item">-->
+<!--                <div class="activity-header">-->
+<!--                    <span class="activity-title" th:text="${activity.title}">Posted a new update</span>-->
+<!--                    <span class="activity-date" th:text="${#temporals.format(activity.date, 'MMM dd, yyyy')}">May 1, 2024</span>-->
+<!--                </div>-->
+<!--                <p class="activity-content" th:text="${activity.content}">-->
+<!--                    Shared a new article about web development best practices...-->
+<!--                </p>-->
+<!--            </li>-->
+<!--            &lt;!&ndash; Fallback content if no activities &ndash;&gt;-->
+<!--            <li th:if="${#lists.isEmpty(activities)}" class="activity-item">-->
+<!--                <p class="activity-content">No recent activities to display.</p>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </section>-->
+</main>
+</body>
+</html>
